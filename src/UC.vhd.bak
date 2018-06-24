@@ -15,7 +15,7 @@ entity control is
 		ALUop_o		:	out	std_logic_vector(3 downto 0);				-- seleccion de operacion de ALU
 		MemWrite_o	:	out	std_logic;										-- escritura de memoria
 		ALUsrc_o		:	out	std_logic;										-- selecciona entre un inmediato y un registro
-		Reg_W_o	:	out	std_logic										-- escritura de registro
+		Reg_W_o	:	out	std_logic;										-- escritura de registro
 	);
 end control;
 
