@@ -122,7 +122,7 @@ BEGIN
 		CASE funct3 IS
 			WHEN "000" =>  -- INstruccion BEQ
 						MemWrite_o<='0';
-   						ALUsrc_o<='1';
+   						ALUsrc_o<='0';
 						Uncondbranch_o<='0';
 						Condbranch_o<='1';
 						Reg_W_o<='0';
@@ -132,7 +132,7 @@ BEGIN
 						NOzero<='0';     
 			WHEN "001" =>  -- INstruccion BNE
 						MemWrite_o<='0';
-   						ALUsrc_o<='1';
+   						ALUsrc_o<='0';
 						Uncondbranch_o<='0';
 						Condbranch_o<='1';
 						Reg_W_o<='0';
