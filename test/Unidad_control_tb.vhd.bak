@@ -17,7 +17,7 @@ COMPONENT unidad_control
 	Reg_W_o: OUT std_logic;
 	MemtoReg_o: OUT std_logic;
 	MemRead_o: OUT std_logic;
-	ALUop_o: OUT std_logic_vector(3 downto 0);
+	ALUop_o: OUT std_logic_vector(3 downto 0)
 	NOzero: OUT std_logic
 	);
 END COMPONENT; 
@@ -38,14 +38,12 @@ BEGIN
 	MemtoReg_o,
 	MemRead_o,
 	ALUop_o,
-	NOzero);
-	
-estimulos : PROCESS 
+	NOzerosignal Memoria_ram: ram_memory;);
+estimulos : PROCESS IS
   -- Put declarations here.
 BEGIN
 	
-	-- INSTR_i<=x"06400213";
-	INSTR_I <= "00000000000100001001000100010011";
+	INSTR_i<=x"06400213";
 	wait for 30 ns;
 	INSTR_i<=x"00A0A483";
 	wait for 30 ns;
