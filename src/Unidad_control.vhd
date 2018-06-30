@@ -108,6 +108,7 @@ BEGIN
 				"0000" when opcode = "1100011" and funct3 = "001";	-- bne
 
 
+<<<<<<< HEAD
 --					  
 --	ALUsrc_o <= '0' when opcode="0110011"; 
 --	Uncondbranch_o <= '0' when opcode="0110011"; 
@@ -142,6 +143,78 @@ BEGIN
 --	MemRead_o<='0' when opcode="0010011" and funct3 = "000";
 --	ALUop_o<="0000" when opcode="0010011" and funct3 = "000";
 --	NOzero<='0' when opcode="0010011" and funct3 = "000";
+=======
+			WHEN OTHERS => ALUop_o<="0000";
+		END CASE;
+	ELSIF (opcode="0010011") THEN --Si es tipo I
+		CASE funct3 IS
+			WHEN "000" =>         --INSTRUCCION ADDI
+						MemWrite_o<='0';
+   						ALUsrc_o<='1';
+						Uncondbranch_o<='0';
+						Condbranch_o<='0';
+						Reg_W_o<='1';
+						MemtoReg_o<='0';
+						MemRead_o<='0';
+						ALUop_o<="0000";
+						NOzero<='0';
+			WHEN "001" => 
+				IF (funct7="0000000") THEN -- INSTRUCCION SLLI
+						MemWrite_o<='0';
+   						ALUsrc_o<='1';
+						Uncondbranch_o<='0';
+						Condbranch_o<='0';
+						Reg_W_o<='1';
+						MemtoReg_o<='0';
+						MemRead_o<='0';
+						ALUop_o<="0111";
+						NOzero<='0';
+				END IF; 			
+			WHEN OTHERS => ALUop_o<="0000";
+		END CASE;
+	ELSIF (opcode="0100011") THEN --Si es tipo S  
+		CASE funct3 IS
+			WHEN "010" =>  --INSTRUCCION SW
+						MemWrite_o<='1';
+   						ALUsrc_o<='1';
+						Uncondbranch_o<='0';
+						Condbranch_o<='0';
+						Reg_W_o<='0';
+						MemtoReg_o<='1';
+						MemRead_o<='0';
+						ALUop_o<="0000";
+						NOzero<='0';
+			WHEN OTHERS => ALUop_o<="0000";
+		END CASE;
+	ELSIF (opcode="1100011") THEN --Si es tipo SB 
+		CASE funct3 IS
+			WHEN "000" =>  -- INstruccion BEQ
+						MemWrite_o<='0';
+   						ALUsrc_o<='1';
+						Uncondbranch_o<='0';
+						Condbranch_o<='1';
+						Reg_W_o<='0';
+						MemtoReg_o<='0';
+						MemRead_o<='0';
+						ALUop_o<="0001";
+						NOzero<='0';     
+			WHEN "001" =>  -- INstruccion BNE
+						MemWrite_o<='0';
+   						ALUsrc_o<='1';
+						Uncondbranch_o<='0';
+						Condbranch_o<='1';
+						Reg_W_o<='0';
+						MemtoReg_o<='0';
+						MemRead_o<='0';
+						ALUop_o<="0001";
+						NOzero<='1';			
+			WHEN OTHERS => ALUop_o<="0000";	   
+		END CASE;
+	--Faltarian tipo U-UJ pero todavia no se implementan
+	END IF;
+      
+END PROCESS tipo;
+>>>>>>> parent of 98db6f7... Solucion problema: Saltaba siempre
   
 --
 --tipo : PROCESS(opcode,funct3,funct7) IS
